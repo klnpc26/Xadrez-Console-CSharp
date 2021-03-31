@@ -24,14 +24,29 @@ namespace tabuleiro
             return pecas[pos.linha, pos.coluna];
         }
 
-        public bool exestePeca(Posicao pos)
+        public bool existePeca(Posicao pos)
         {
             validarPosicao(pos);
             return peca(pos) != null;
         }
+
+        public Peca retirarPeca(Posicao pos)
+        {
+            if(peca(pos) == null)
+            {
+                return null;
+            }
+
+            Peca aux = peca(pos);
+            aux.posicao = null;
+            pecas[pos.linha, pos.coluna] = null;
+
+            return aux;
+        }
+
         public void colocarPeca(Peca p, Posicao pos)
         {
-            if (exestePeca(pos))
+            if (existePeca(pos))
                 throw new TabuleiroException("Ja existe uma peça nessa posição");
 
             pecas[pos.linha, pos.coluna] = p;
